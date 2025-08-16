@@ -13,7 +13,7 @@ export class Api {
         this.baseUrl = baseUrl;
         this.options = {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json', 
                 ...(options.headers as object ?? {})
             }
         };

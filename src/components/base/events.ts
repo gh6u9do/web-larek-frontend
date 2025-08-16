@@ -5,7 +5,7 @@ type Subscriber = Function;
 type EmitterEvent = {
     eventName: string,
     data: unknown
-};
+}; 
 
 export interface IEvents {
     on<T extends object>(event: EventName, callback: (data: T) => void): void;
