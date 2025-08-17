@@ -324,7 +324,7 @@ constructor(templateId: string, events: EventEmiter) - конструктор п
 - getId():string - возвращает хранимое id
 
 
-#### Класс BasketItemView
+#### Класс BasketCardView
 Класс отвечает за отображение карточки товара в модальном окне корзины
 constructor(templateId: string, events: eventEmitter)
 
