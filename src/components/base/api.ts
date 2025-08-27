@@ -16,7 +16,7 @@ export class Api {
                 'Content-Type': 'application/json', 
                 ...(options.headers as object ?? {})
             }
-        };
+        }; 
     }
 
     protected handleResponse(response: Response): Promise<object> {

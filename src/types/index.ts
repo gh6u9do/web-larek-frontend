@@ -1,5 +1,5 @@
 // тип категории товара
-type TItemCategory = "софт-скил" | "хард-скил" | "дополнительное" | "другое";
+type TItemCategory = "софт-скил" | "хард-скил" | "дополнительное" | "кнопка" | "другое";
 
 // интерфейс товара (такие данные приходят с сервера)
 export interface IItem {
@@ -25,11 +25,13 @@ export interface ICardsData {
     setCards(cards: IItem[]):void;
     getCards(): IItem[];
     getCardById(id: string): IItem | undefined;
-    preview: string | null; // id товара который сейчас в модалке
+    previewId: string | null; // id товара который сейчас в модалке
+    setPreviewId(id: string):void;
+    getPreviewId():string | null;
 }
 
 // интерфейс товара в корзине
-export type TBasketItem = Pick<IItem, "id" | "title" | "price">
+export type TBasketItem = Pick<IItem, "id" | "title" | "price"> 
 
 // интерфейс модели корзины
 export interface IBasket {
@@ -37,9 +39,9 @@ export interface IBasket {
     getTotal(): number;
     getItemsCount():number;
     getItems(): TBasketItem[];
-    addItem(item: TBasketItem, payload: Function | null):void;
-    removeItem(itemId: string, payload: Function | null): void;
-    clear(payload: Function | null):void;
+    addItem(item: TBasketItem, payload?: Function | null):void;
+    removeItem(itemId: string, payload?: Function | null): void;
+    clear(payload?: Function | null):void;
     hasItem(itemId:string):boolean;
 }
 
@@ -60,11 +62,12 @@ export interface IUserContact {
 
 // тип для всей информации о заказе 
 export interface IOrderFull extends IOrderForm, IUserContact {
-    items: TBasketItem[];
+    items: string[];
+    total: number;
 }
 
 // интерфейс для модели заказа
-interface IOrderData extends IOrderForm, IUserContact{
+export interface IOrderData extends IOrderForm, IUserContact{
    validatePayment(): boolean;
    validateAddress():boolean;
    validateEmail():boolean;
@@ -73,4 +76,10 @@ interface IOrderData extends IOrderForm, IUserContact{
 
    getOrder(items: TBasketItem[]): IOrderFull;
    clear():void;
+}
+
+// интерфейс для объекта возвращаемого с сервера при отправке заказа
+export interface IOrderResult {
+    id: string;
+    tottal: number;
 }
